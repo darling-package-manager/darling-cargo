@@ -22,7 +22,7 @@ impl darling::PackageManager for Cargo {
     fn get_all_explicit(&self, _context: &darling::Context) -> anyhow::Result<Vec<(String, String)>> {
         let output = String::from_utf8(std::process::Command::new("cargo").arg("install").arg("--list").output()?.stdout)?;
         let installed_crates = output.lines().filter(|line| !line.chars().all(|char| char.is_whitespace()));
-        let pattern = regex_macro::regex!(r"^(\S+)\s(^:)");
+        let pattern = regex_macro::regex!(r"^(\S+)\s([^:]+)");
         let crates = installed_crates
             .map(|entry| {
                 let captures = pattern
