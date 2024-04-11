@@ -3,7 +3,9 @@ name = "darling-cargo"
 version = "0.1.0"
 edition = "2021"
 license = "MIT"
+authors = ["Violet Iapalucci"]
 
 [dependencies]
 anyhow = "1.0.82"
 darling-api = "0.1.2"
+regex-macro = "0.2.0"
