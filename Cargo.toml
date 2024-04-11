@@ -4,6 +4,7 @@ version = "0.1.0"
 edition = "2021"
 license = "MIT"
 authors = ["Violet Iapalucci"]
+description = "Darling implementation for global cargo crates"
 
 [dependencies]
 anyhow = "1.0.82"
