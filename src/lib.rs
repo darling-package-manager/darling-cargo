@@ -24,13 +24,8 @@ impl darling::PackageManager for Cargo {
         let installed_crates = output.lines().filter(|line| !line.chars().all(|char| char.is_whitespace()));
         let pattern = regex_macro::regex!(r"^(\S+)\s([^:]+)");
         let crates = installed_crates
-            .map(|entry| {
-                let captures = pattern
-                    .captures(entry)
-                    .ok_or_else(|| anyhow::anyhow!("Error parsing installed crate: {entry}"))?;
-                Ok((captures[1].to_owned(), captures[2].to_owned()))
-            })
-            .collect::<anyhow::Result<Vec<_>>>()?;
+            .filter_map(|entry| pattern.captures(entry).map(|capt| (capt[1].to_owned(), capt[2].to_owned())))
+            .collect::<Vec<_>>();
 
         Ok(crates)
     }
